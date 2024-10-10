@@ -1,0 +1,11 @@
+{
+  "name": "ClipReader",
+  "displayName": "ClipReader",
+  "expo": {
+    "plugins": [
+      [
+        "expo-image-picker"
+      ]
+    ]
+  }
+}
