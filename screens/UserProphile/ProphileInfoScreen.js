@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { SafeAreaView, View, Text, StyleSheet, Pressable, Image } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, Pressable, Image, ScrollView } from "react-native";
 import { KolorKit } from "../../constants/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -61,7 +61,7 @@ export default function ProphileInfoScreen({route, navigation}) {
 
 
     return (
-        <SafeAreaView style={styles.userInfoScreen}>
+        <ScrollView style={styles.userInfoScreen}>
                 <View style={styles.userInfoContainer}>
                     <View style={styles.userLogo}>
                         {userLogo}
@@ -80,17 +80,17 @@ export default function ProphileInfoScreen({route, navigation}) {
                         </View>
                     </View>
                 </View>
-        </SafeAreaView>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    pressed: {
-        opacity: 0.7,
-    },
     userInfoScreen: {
         flex: 1,
         backgroundColor: KolorKit.blackBlueTheme.backgroundApp,
+    },
+    pressed: {
+        opacity: 0.7,
     },
     userInfoContainer: {
         flexDirection: 'row',

@@ -39,7 +39,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
             !passwordIsValid ||
             (!isLogin && (!emailsAreEqual || !passwordsAreEqual))
         ) {
-            Alert.alert('Invalid input', 'Please check your entered credentials.');
+            Alert.alert('Invalid input', 'Please check your entered credentials. Password must be at least 8 characters');
             setCredentialsInvalid({
                 email: !emailIsValid,
                 confirmEmail: !emailIsValid || !emailsAreEqual,

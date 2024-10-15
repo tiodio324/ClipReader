@@ -181,6 +181,9 @@ function AuthenticatedStack() {
                 component={BookScreen}
                 options={{
                     headerTitle: selectedBook.substring(0, selectedBook.length - 7),
+                    headerTitleStyle: {
+                        fontSize: 18,
+                    }
                 }}
             />
         </Stack.Navigator>

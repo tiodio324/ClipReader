@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Pressable, Text, Image, SafeAreaView, View, StyleSheet, Alert } from "react-native";
+import { Pressable, Text, Image, SafeAreaView, View, StyleSheet, Alert, ScrollView } from "react-native";
 import { KolorKit } from "../../constants/styles";
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import RNRestart from 'react-native-restart';
 
 import defaultUserPhoto from '../../assets/DefaultProfileIcon.jpg';
 import LoadingOverlay from "../../components/ui/LoadingOverlay";
@@ -37,9 +36,6 @@ export default function EditProfileScreen({route}) {
             await updateValue(dataCtx.uid, editedValueId, valueData);
             await fetchLoadFile();
             setUploading(false);
-            // setTimeout(() => {
-            //     RNRestart.Restart();
-            // }, 5000);
         } catch (error) {
             Alert.alert('Could not save your changes. Please try again later!', error.message);
             setUploading(false);
@@ -121,7 +117,7 @@ export default function EditProfileScreen({route}) {
 
 
     return (
-        <SafeAreaView style={styles.editProfile}>
+        <ScrollView style={styles.editProfile}>
             <View style={styles.photoContainer}>
                 <Pressable onPress={() => pickImage()}>
                     {userLogo}
@@ -134,7 +130,7 @@ export default function EditProfileScreen({route}) {
                 onSubmit={editConfirmHandler}
                 defaultValues={selectedValue}
             />
-        </SafeAreaView>
+        </ScrollView>
     );
 }
 

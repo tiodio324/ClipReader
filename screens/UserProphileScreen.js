@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { StyleSheet, View, Text, Pressable, Image, SafeAreaView, Alert } from "react-native";
+import { StyleSheet, View, Text, Pressable, Image, SafeAreaView, Alert, ScrollView } from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { KolorKit } from "../constants/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -76,7 +76,7 @@ export default function UserProphileScreen({route, navigation}) {
 
 
     return (
-        <SafeAreaView style={styles.prophileScreen}>
+        <ScrollView style={styles.prophileScreen}>
                 <Pressable onPress={prophileInfoHandler} android_ripple={{color: KolorKit.blackBlueTheme.btnNavigationHover}} style={({pressed}) => [styles.prophileInfo, pressed && styles.pressed]}>
                     <View style={styles.prophileInfoContainer}>
                         <View style={styles.prophileLogo}>
@@ -106,7 +106,7 @@ export default function UserProphileScreen({route, navigation}) {
                         </View>
                     </View>
                 </Pressable>
-        </SafeAreaView>
+        </ScrollView>
     );
 }
 

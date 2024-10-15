@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
-import { Image, Pressable, SafeAreaView, Text, View, StyleSheet, FlatList } from "react-native";
+import { Image, Pressable, SafeAreaView, Text, View, StyleSheet, FlatList, Alert } from "react-native";
 import Fontisto from '@expo/vector-icons/Fontisto';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { KolorKit } from "../constants/styles";
@@ -25,6 +25,18 @@ export default function FavoritesListScreen({route, navigation}) {
         navigation.navigate('BookScreen');
     }
 
+    function preDeleteBookHandler(selectedBookTitle) {
+        Alert.alert(`Are you sure, you want to delete ${selectedBookTitle}?`, '', [
+            {
+                text: 'Cancel',
+                style: 'cancel',
+            },
+            {
+                text: 'Yes, delete',
+                onPress: () => deleteBookHandler(selectedBookTitle),
+            }
+        ]);
+    }
     async function deleteBookHandler(selectedBookTitle) {
         setLoading(true);
         try {
@@ -52,8 +64,10 @@ export default function FavoritesListScreen({route, navigation}) {
             bookCtx.deleteBook(editedBookId);
             await deleteBook(bookCtx.uid, selectedBookTitle);
 
-            getFavoriteFileTitlesCallback();
-            fetchFavoriteFileTitlesCallback();
+            setTimeout(() => {
+                getFavoriteFileTitlesCallback();
+                fetchFavoriteFileTitlesCallback();
+            }, 100);
         } catch (e) {
             console.log('Could not delete book', e);
             setLoading(false);
@@ -71,8 +85,11 @@ export default function FavoritesListScreen({route, navigation}) {
 
                 updateFavoriteBookName(bookCtx.uid, updatedFavoriteFileTitleArray);
             }
-            getFavoriteFileTitlesCallback();
-            fetchFavoriteFileTitlesCallback();
+
+            setTimeout(() => {
+                getFavoriteFileTitlesCallback();
+                fetchFavoriteFileTitlesCallback();
+            }, 100);
         } catch (e) {
             console.log('Could not remove book from favorites', e);
             setLoading(false);
@@ -144,7 +161,7 @@ export default function FavoritesListScreen({route, navigation}) {
                                     </View>
                                     <View style={styles.bookOptionsContainer}>
                                         <Fontisto style={{padding: 6}} onPress={() => removeFromFavoritesHandler(item)} name="favorite" size={26} color={KolorKit.blackBlueTheme.yellow400} />
-                                        <MaterialIcons style={{padding: 6}} onPress={() => deleteBookHandler(item)} name="delete-forever" size={26} color={KolorKit.defaultColors.error500} />
+                                        <MaterialIcons style={{padding: 6}} onPress={() => preDeleteBookHandler(item)} name="delete-forever" size={26} color={KolorKit.defaultColors.error500} />
                                     </View>
                                 </View>
                             </Pressable>

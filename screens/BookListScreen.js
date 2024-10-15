@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
-import { Image, Pressable, SafeAreaView, Text, View, StyleSheet, FlatList } from "react-native";
+import { Image, Pressable, SafeAreaView, Text, View, StyleSheet, FlatList, Alert} from "react-native";
 import Fontisto from '@expo/vector-icons/Fontisto';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { KolorKit } from "../constants/styles";
@@ -25,6 +25,19 @@ export default function BookListScreen({route, navigation}) {
         navigation.navigate('BookScreen');
     }
 
+
+    function preDeleteBookHandler(selectedBookTitle) {
+        Alert.alert(`Are you sure, you want to delete ${selectedBookTitle}?`, '', [
+            {
+                text: 'Cancel',
+                style: 'cancel',
+            },
+            {
+                text: 'Yes, delete',
+                onPress: () => deleteBookHandler(selectedBookTitle),
+            }
+        ]);
+    }
     async function deleteBookHandler(selectedBookTitle) {
         setLoading(true);
         try {
@@ -44,8 +57,10 @@ export default function BookListScreen({route, navigation}) {
             bookCtx.deleteBook(editedBookId);
             await deleteBook(bookCtx.uid, selectedBookTitle);
 
-            getFileTitlesCallback();
-            fetchFileTitlesCallback();
+            setTimeout(() => {
+                getFileTitlesCallback();
+                fetchFileTitlesCallback();
+            }, 100);
         } catch (e) {
             console.log('Could not delete book', e);
             setLoading(false);
@@ -140,7 +155,7 @@ export default function BookListScreen({route, navigation}) {
                                         <Pressable onPress={() => addToFavoritesHandler(item)} android_ripple={{color: KolorKit.blackBlueTheme.yellow400}} style={({pressed}) =>  pressed && styles.pressed}>
                                             <Fontisto style={{padding: 6}} name="favorite" size={26} color={KolorKit.blackBlueTheme.iconButton} />
                                         </Pressable>
-                                        <MaterialIcons style={{padding: 6}} onPress={() => deleteBookHandler(item)} name="delete-forever" size={26} color={KolorKit.defaultColors.error500} />
+                                        <MaterialIcons style={{padding: 6}} onPress={() => preDeleteBookHandler(item)} name="delete-forever" size={26} color={KolorKit.defaultColors.error500} />
                                     </View>
                                 </View>
                             </Pressable>

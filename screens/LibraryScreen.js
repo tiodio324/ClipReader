@@ -317,7 +317,7 @@ export default function LibraryScreen({route, navigation}) {
                 return (
                     <Pressable onPress={openNewBookHandler} android_ripple={{color: KolorKit.blackBlueTheme.btnNavigationHover}} style={({pressed}) => [styles.headerAddBookContainer, pressed && styles.pressed]}>
                         <View style={styles.headerAddBook}>
-                            <Ionicons name="add-circle-outline" size={20} color={KolorKit.blackBlueTheme.iconButton} />
+                            <Ionicons name="add-circle-outline" size={18} color={KolorKit.blackBlueTheme.iconButton} />
                             <Text style={styles.headerAddTitle}>Add book</Text>
                         </View>
                     </Pressable>
@@ -328,7 +328,7 @@ export default function LibraryScreen({route, navigation}) {
                     <Pressable onPress={scanBooksHandler} android_ripple={{color: KolorKit.blackBlueTheme.btnNavigationHover}} style={({pressed}) => [styles.headerScanBookContainer, pressed && styles.pressed]}>
                         <View style={styles.headerAddBook}>
                             <Text style={styles.headerScanTitle}>Scan books</Text>
-                            <Ionicons name="reload" size={20} color={KolorKit.blackBlueTheme.iconButton} />
+                            <Ionicons name="reload" size={18} color={KolorKit.blackBlueTheme.iconButton} />
                         </View>
                     </Pressable>
                 )

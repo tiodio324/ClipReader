@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { SafeAreaView, View, Text, StyleSheet, FlatList, Alert, Pressable, TextInput, Animated, Easing} from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, FlatList, Alert, Pressable, TextInput, Animated, Easing, ScrollView} from "react-native";
 import { KolorKit } from "../../constants/styles";
 import Feather from '@expo/vector-icons/Feather';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -545,9 +545,9 @@ export default function BookScreen({route, navigation}) {
                         </View>
                     )}
                 </View>
-                <View style={styles.outputBookDataContainer}>
+                <ScrollView style={styles.outputBookDataContainer}>
                     {outputBookData}
-                </View>
+                </ScrollView>
             </SafeAreaView>
         );
     }
@@ -612,13 +612,13 @@ export default function BookScreen({route, navigation}) {
                     </View>
                 </View>
             </View>
-            <View>
+            <ScrollView>
                 <Pressable onPress={startReadHandler} android_ripple={{color: KolorKit.blackBlueTheme.btnNavigationHover}} style={({pressed}) => [styles.btnStart, pressed && styles.pressed]}>
                     <View style={styles.btnStartContainer}>
                         <Text style={styles.btnStartTitle}>Start</Text>
                     </View>
                 </Pressable>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -643,13 +643,13 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     readSettings: {
-        fontSize: 16,
+        fontSize: 14,
         color: KolorKit.blackBlueTheme.numeric,
     },
     readSettingsLabel: {
         alignSelf: 'flex-end',
         marginBottom: 10,
-        fontSize: 14,
+        fontSize: 12,
         color: KolorKit.blackBlueTheme.numeric,
     },
     speedWordsContainer: {
@@ -677,7 +677,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     wordsCount: {
-        fontSize: 16,
+        fontSize: 14,
         color: KolorKit.blackBlueTheme.numeric,
         marginHorizontal: 4,
     },
