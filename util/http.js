@@ -1,7 +1,7 @@
 import axios from "axios";
 import { firebase } from "./firebase";
 
-const BACKEND_URL = 'https://clip-reader-default-rtdb.europe-west1.firebasedatabase.app/';
+const BACKEND_URL = *******************************************;
 
 
 export async function storeValue(valueData, uid) {  // Отправить данные на сервер.
